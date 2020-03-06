@@ -6,6 +6,26 @@
     <div v-if="status==0" class="content-wrapper">
          <div class="content-main">
              setting
+             <div style="display: flex; justify-content: space-around;" >
+                 <div>운동시간</div>
+                 <div >
+                     <MinSecComboBox seconds="60"/>
+                 </div>
+             </div>
+             <br/>
+             <div style="display: flex; justify-content: space-around;" >
+                 <div>운동시간</div>
+                 <div >
+                     <MinSecComboBox seconds="62"/>
+                 </div>
+             </div>
+             <br/>
+             <div style="display: flex; justify-content: space-around;" >
+                 <div>운동시간</div>
+                 <div >
+                     <MinSecComboBox seconds="60"/>
+                 </div>
+             </div>
          </div>
          <div class="btn-area">
              <div class="btn btn-full">start</div>
@@ -39,11 +59,13 @@
 <script>
 
 import NaviBar from '@/components/NaviBar.vue'
+import MinSecComboBox from '@/components/MinSecComboBox.vue'
 
 export default {
     name: 'tbtPageView',
     components: {
         NaviBar,
+        MinSecComboBox,
     },
     data() {
         return{

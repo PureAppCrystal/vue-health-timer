@@ -51,7 +51,6 @@ export default {
 }
 
 #appInfo {
-    
     background-color: blue;
     height: 50%;
 }
