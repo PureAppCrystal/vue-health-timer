@@ -4,27 +4,29 @@
     <NaviBar class="naviBar" title="TBT"/>
      
     <div v-if="status==0" class="content-wrapper">
-         <div>
+         <div class="content-main">
              setting
          </div>
          <div class="btn-area">
-
+             <div class="btn btn-full">start</div>
+             
          </div>
     </div>
     <div v-if="status==1" class="content-wrapper">
-         <div>
+         <div class="content-main">
              training
          </div>
          <div class="btn-area">
-
+             <div class="btn btn-full">puase</div>
          </div>
     </div>
     <div v-if="status==2" class="content-wrapper">
-         <div>
+         <div class="content-main">
              pause
          </div>
          <div class="btn-area">
-
+             <div class="btn btn-half">restart</div>
+             <div class="btn btn-half">clear</div>
          </div>
 
     </div>
@@ -73,8 +75,26 @@ export default {
     height:90%;
 }
 
+.content-wrapper .content-main:nth-child(1) {
+    background-color: yellow;
+    height: 80%;
+}
 .btn-area {
     background-color: gray;
-    height: 30%;
+    height: 20%;
+    display: flex;
+    
+}
+.btn {
+    background-color: white;
+    margin: 1rem;
+    text-align: center;
+    font-size: 2.8rem;
+}
+.btn-full {
+    width: 100%;
+}
+.btn-half {
+    width: 50%;
 }
 </style>
