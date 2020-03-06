@@ -1,6 +1,6 @@
 <template>
 <div id="naviBar">
-    <div>Home</div>
+    <div @click="goHome()">Home</div>
     <div>{{title}}</div>
     <div></div>
 </div>
@@ -13,7 +13,9 @@ export default {
     name: 'naviBar',
     props: ["title"],
     methods: {
-        
+        goHome: function() {
+            this.$router.push("/main");
+        }
     }
 }
 </script>
