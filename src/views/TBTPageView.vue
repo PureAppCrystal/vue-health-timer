@@ -75,5 +75,6 @@ export default {
 
 .btn-area {
     background-color: gray;
+    height: 30%;
 }
 </style>
