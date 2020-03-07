@@ -9,21 +9,22 @@
              <div style="display: flex; justify-content: space-around;" >
                  <div>운동시간</div>
                  <div >
-                     <MinSecComboBox seconds="60"/>
+                     {{trainingTime}}
+                     <MinSecComboBox :type="'training'" :seconds="trainingTime" @setSetting="setSetting"/>
                  </div>
              </div>
              <br/>
              <div style="display: flex; justify-content: space-around;" >
                  <div>운동시간</div>
                  <div >
-                     <MinSecComboBox seconds="62"/>
+                     <MinSecComboBox :type="'rest'" :seconds="restTime" @setSetting="setSetting"/>
                  </div>
              </div>
              <br/>
              <div style="display: flex; justify-content: space-around;" >
                  <div>운동시간</div>
                  <div >
-                     <MinSecComboBox seconds="60"/>
+                     <MinSecComboBox :type="'set'" :seconds="setCount" @setSetting="setSetting"/>
                  </div>
              </div>
          </div>
@@ -70,12 +71,33 @@ export default {
     data() {
         return{
             status: 0, // 0: 셋팅상태, 1: 운동상태, 2: 일시중지상태
+            trainingTime: 20,
+            restTime: 10,
+            setCount: 8,
+            typeList:['training', 'rest', 'set'],
+            selectedType: 'training',
         }
     },
     computed: {
     
     },
     methods: {
+        setSetting: function(type, value) {
+            console.log("seSetting : " , type, value);
+            switch(type) {
+                case "training" :
+                    this.trainingTime = value
+                    break;
+                case "rest" :
+                    this.restTime = value
+                    break;
+                case "set" :
+                    this.setCount = value
+                    break;
+
+
+            }
+        }
    
     },
     mounted() {

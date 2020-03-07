@@ -2,10 +2,10 @@
 <div class="minSecComboBox">
     <div class="mscb-items">
         <input id="min1" type="number"  pattern="\d*" min="0" max="9" class="mscb-item" :value="min1"  @keyup="numUp($event)" /> <!--@keypress="numPress($event)" @keydown="numDown($event) -->
-        <input id="min2" type="number"  pattern="\d*" min="0" max="9" class="mscb-item" v-model="min2" @keyup="numUp($event)"/>
+        <input id="min2" type="number"  pattern="\d*" min="0" max="9" class="mscb-item" :value="min2" @keyup="numUp($event)"/>
         <div id="mscb-sep" class="mscb-item">:</div>
-        <input id="sec1" type="number"  pattern="\d*" min="0" max="9" class="mscb-item" v-model="sec1" @keyup="numUp($event)"/>
-        <input id="sec2" type="number"  pattern="\d*" min="0" max="9" class="mscb-item" v-model="sec2" @keyup="numUp($event)"/>
+        <input id="sec1" type="number"  pattern="\d*" min="0" max="9" class="mscb-item" :value="sec1" @keyup="numUp($event)"/>
+        <input id="sec2" type="number"  pattern="\d*" min="0" max="9" class="mscb-item" :value="sec2" @keyup="numUp($event)"/>
         
         {{time}}
     </div>
@@ -23,6 +23,7 @@ export default {
     name: '',
     props:[
         // eslint-disable-next-line no-undef
+        "type",
         "seconds",
     ],
     data() {
@@ -49,8 +50,6 @@ export default {
             get: function(){
                 return parseInt(this.time.substring(0,1));
             },
-            // set: function(value) {
-            // }
         },
         min2: function(){
             return parseInt(this.time.substring(1,2));
@@ -80,38 +79,28 @@ export default {
         numUp: function(event) {
             console.log("event : ", event);
             console.log("numUp : ", event.target.value)
-            if( event.keyCode>= 48 && event.keyCode <=57) {
-                const newValue = event.key;
-                event.target.value = newValue;
+            const {min1, min2, sec1, sec2} = this;
+            const newValue = event.key;
+            let seconds =0;
 
-                const {min1, min2, sec1, sec2} = this;
+            if( event.keyCode>= 48 && event.keyCode <=57) {
+                //event.target.value = newValue;
+
                 switch(event.target.id) {
                     case "min1" :
-                        this.seconds = newValue * 600
-                                    + min2 * 60
-                                    + sec1 * 10
-                                    + sec2 * 1;
+                        seconds = newValue * 600 + min2 * 60 + sec1 * 10 + sec2 * 1;
                         break;
                     case "min2" :
-                        this.seconds = min1 * 600
-                                    + newValue * 60
-                                    + sec1 * 10
-                                    + sec2 * 1;
+                        seconds = min1 * 600 + newValue * 60 + sec1 * 10 + sec2 * 1;
                         break;
                     case "sec1" :
-                        this.seconds = min1 * 600
-                                    + min2 * 60
-                                    + newValue * 10
-                                    + sec2 * 1;
+                        seconds = min1 * 600 + min2 * 60 + newValue * 10 + sec2 * 1;
                         break;
                     case "sec2" :
-                        this.seconds = min1 * 600
-                                    + min2 * 60
-                                    + sec1 * 10
-                                    + newValue * 1;
+                        seconds = min1 * 600 + min2 * 60 + sec1 * 10 + newValue * 1;
                         break;
-
                 }
+                this.$emit("setSetting", this.type, seconds);
 
                 //focus 변경 
                 let next = event.target.nextElementSibling;
@@ -128,12 +117,12 @@ export default {
         btnAdd: function(event) {
             const target = event.target;
             this.btnAnimation(target);
-            this.seconds = this.seconds + 1;
+            this.$emit("setSetting", this.type, this.seconds + 1);
         },
         btnMin: function(event) {
             const target = event.target;
             this.btnAnimation(target);
-            this.seconds = this.seconds - 1;
+            this.$emit("setSetting", this.type, this.seconds - 1);
         },
         btnAnimation: function(target) {
             target.classList.add('clicked');
