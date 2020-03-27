@@ -7,7 +7,6 @@
         <input id="sec1" type="number"  pattern="\d*" min="0" max="9" class="mscb-item" :value="sec1" @keyup="numUp($event)"/>
         <input id="sec2" type="number"  pattern="\d*" min="0" max="9" class="mscb-item" :value="sec2" @keyup="numUp($event)"/>
         
-        {{time}}
     </div>
     <div  class="mscb-btns">
         <div class="mscb-btn" @click="btnAdd($event)" @keypress="btnPress($event)"> +</div>
@@ -147,10 +146,11 @@ export default {
 <style scoped>
 .minSecComboBox {
     height: 4rem;
-    width: 12rem;
-    border-radius: 5px;
+    width: 13rem;
+    border-radius: 10px;
 
     display: flex;
+
 }
 .mscb-items {
     background-color: white;
@@ -158,22 +158,40 @@ export default {
     justify-content: center;
     align-items: center;
     flex: 1;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.mscb-item:nth-child(1) {
+    /* border: solid 1px black; */
 }
 .mscb-item {
+    padding: 0px;
     font-size: 3rem;
     width: 2rem;
+    
     border: none;
     outline: none;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    
 }
 
 .mscb-btns {
-
+    background-color: gray;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.mscb-btn+.mscb-btn {
+    border-top: solid 1px black;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 10px;
 }
 .mscb-btn {
     background-color: gray;
     font-size: 1.6rem;
     height: 2rem;
     width: 2rem;
+    border-top-right-radius: 10px;
 }
 .mscb-btn.clicked {
     background-color: red;
